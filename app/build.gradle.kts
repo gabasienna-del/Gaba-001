@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.gabasienna.app" // <- сюда твой пакет
+    namespace = "com.gabasienna.app" 
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.gabasienna.app" // по старинке, для совместимости
+        applicationId = "com.gabasienna.app"
         minSdk = 30
         targetSdk = 35
         versionCode = 1
@@ -36,13 +36,6 @@ android {
     }
 }
 
-repositories {
-    google()
-    mavenCentral()
-}
-
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.23")
     implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.7.0")
 }
