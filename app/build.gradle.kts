@@ -1,21 +1,28 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("dev.rikka.tools.refine")
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android") version "1.9.23"
 }
 
 android {
-    namespace = "com.gabasienna.module"
-    compileSdk = 34
+    namespace = "com.gabasienna.app" // <- сюда твой пакет
+    compileSdk = 35
 
     defaultConfig {
+        applicationId = "com.gabasienna.app" // по старинке, для совместимости
         minSdk = 30
-        targetSdk = 34
+        targetSdk = 35
+        versionCode = 1
+        versionName = "1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -29,8 +36,13 @@ android {
     }
 }
 
+repositories {
+    google()
+    mavenCentral()
+}
+
 dependencies {
-    compileOnly("de.robv.android.xposed:api:82")
-    compileOnly("org.lsposed.hiddenapibypass:hiddenapibypass:4.3")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.23")
     implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.appcompat:appcompat:1.7.0")
 }
