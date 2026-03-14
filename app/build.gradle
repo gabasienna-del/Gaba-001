@@ -1,23 +1,43 @@
 plugins {
     id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
+    namespace 'com.gabasienna.module'
     compileSdk 34
+
     defaultConfig {
-        applicationId "com.gabit.autoreply"
-        minSdk 21
+        applicationId "com.gabasienna.module"
+        minSdk 30
         targetSdk 34
         versionCode 1
         versionName "1.0"
     }
+
     buildTypes {
         release {
             minifyEnabled false
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
 }
 
 dependencies {
-    compileOnly files('libs/api-82.jar')
+    compileOnly 'de.robv.android.xposed:api:82'
+    compileOnly 'org.lsposed.hiddenapibypass:hiddenapibypass:4.3'
+    implementation 'androidx.core:core-ktx:1.12.0'
 }

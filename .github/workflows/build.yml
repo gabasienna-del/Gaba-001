@@ -1,25 +1,29 @@
-name: Build LSPosed APK
+name: Build APK
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: actions/checkout@v4
 
-    - name: Setup JDK
-      uses: actions/setup-java@v3
+    - name: Setup Java
+      uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: 17
+        java-version: '17'
 
-    - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Grant permission
+      run: chmod +x gradlew
 
     - name: Build APK
       run: ./gradlew assembleRelease
@@ -27,5 +31,5 @@ jobs:
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: LSPosed-APK
-        path: app/build/outputs/apk/release/app-release.apk
+        name: app-release
+        path: app/build/outputs/apk/release/*.apk
